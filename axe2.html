@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight — Axe 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --coral: #ea4560;
+      --coral-dark: #d63852;
+      --ink: #150a10;
+      --ink-2: #1c0f16;
+      --cream: #ffffff;
+      --nav-h: 64px;
+      --band-h: 190px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: auto;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--ink);
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ---------- Header band ---------- */
+    header.band {
+      background: var(--coral);
+      padding: 24px 48px;
+      flex: none;
+    }
+
+    .logo img {
+      display: block;
+      height: 80px;
+      width: auto;
+    }
+
+    /* ---------- Nav ---------- */
+    nav.mainnav {
+      background: var(--ink);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      flex: none;
+    }
+
+    .navlist {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 12px 48px;
+      gap: 90px;
+    }
+
+    .navlist a {
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: #f4f2f3;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .navlist a::after {
+      display: none;
+    }
+
+    .navlist a:hover {
+      color: var(--coral);
+    }
+
+    .navlist>li>a.is-active {
+      color: var(--coral);
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      list-style: none;
+      padding: 10px 0;
+      min-width: 220px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      display: none;
+      z-index: 1000;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 8px 16px;
+      color: #f4f2f3;
+      font-size: 13.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: rgba(234, 69, 96, 0.15);
+      color: var(--coral);
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* ---------- Sub-page content ---------- */
+    main.content {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: visible;
+      padding: 72px 48px 96px;
+      background: #0b0a14 url('assets/hero-bg.png') center center / cover no-repeat;
+    }
+
+    main.content::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom, rgba(11, 10, 20, 0.28) 0%, rgba(21, 10, 16, 0.72) 78%, var(--ink) 100%);
+    }
+
+    .content-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 100%;
+	  text-align: justify;
+      border-left: 3px solid var(--coral);
+      padding-left: 28px;
+    }
+
+    .content h1 {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 600;
+      font-size: 38px;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 22px;
+    }
+
+    .content p {
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: rgba(244, 242, 243, 0.72);
+      margin-bottom: 18px;
+    }
+
+    .content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ---------- WP leaders ---------- */
+    .wp-leaders {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-bottom: 30px;
+    }
+
+    .wp-leader {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 12px 18px;
+    }
+
+    .wp-leader-avatar {
+      flex: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--coral);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wp-leader-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .wp-leader-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .wp-leader-role,
+    .wp-leader-lab {
+      font-size: 12.5px;
+      line-height: 1.4;
+      color: rgba(244, 242, 243, 0.65);
+    }
+
+    /* ---------- Inline illustration ---------- */
+    .content-illustration {
+      float: left;
+      width: 15%;
+      min-width: 110px;
+      margin: 4px 22px 14px 0;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .content-illustration--right {
+      float: right;
+      margin: 4px 0 14px 22px;
+    }
+
+    /* ---------- Contact CTA ---------- */
+    .hero-cta {
+      position: static;
+      padding: 0 48px 44px;
+      text-align: right;
+    }
+
+    .hero-cta p {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 14px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--coral);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14.5px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(234, 69, 96, 0.35);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .hero-cta a:hover {
+      background: var(--coral-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--ink);
+      padding: 25px 48px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 70px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      flex: none;
+    }
+
+    .footer-logo img {
+      display: block;
+      height: 40px;
+      width: auto;
+    }
+
+    .partner img {
+      display: block;
+      height: 45px;
+      width: auto;
+    }
+
+    .partner-iel img {
+      height: 60px;
+    }
+
+
+    .footer-links {
+      margin-left: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .footer-links a {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--coral);
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      header.band {
+        padding: 18px 24px;
+      }
+
+      .logo img {
+        height: 32px;
+      }
+
+      .navlist {
+        padding: 10px 24px;
+        gap: 16px 24px;
+      }
+
+      footer {
+        padding: 14px 24px;
+      }
+
+      .footer-links {
+        margin-left: 0;
+      }
+
+      .hero-cta {
+        padding: 0 24px 24px;
+      }
+
+      main.content {
+        padding: 48px 24px 72px;
+      }
+
+      .content h1 {
+        font-size: 30px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .navlist {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      main.content {
+        padding: 48px 24px 72px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="band">
+    <span class="logo"><a href="index.html"><img src="assets/header-logo.png" alt="Insight"></a></span>
+  </header>
+
+  <nav class="mainnav">
+    <ul class="navlist">
+	  <li><a href="presentation.html">Présentation<br>du programme</a></li>
+
+      <li><a href="projets-finances.html" class="">Projets<br>financés</a></li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Actualité</a>
+        <ul class="dropdown-menu">
+          <li><a href="journee-kickoff.html">Journée kick off</a></li>
+          <li><a href="journees-etude.html">Journées d’étude</a></li>
+
+        </ul>
+      </li>
+
+      <li><a href="osc.html">Les instances</a></li>
+
+      <!-- Élément 4 : Work Packages -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Work Packages</a>
+        <ul class="dropdown-menu">
+          <li><a href="wp1.html">WP1 Données numériques </a></li>
+          <li><a href="wp2.html">WP2 Impact sur les sciences humaines et acculturation à l'IA</a></li>
+          <li><a href="wp3.html">WP3 Éthique, déontologie, responsabilité, transformation</a></li>
+          <li><a href="wp4.html">WP4 IA et NLP face aux spécificités des données SHS </a></li>
+        </ul>
+      </li>
+
+      <!-- Élément 5 : Axes transversaux -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Axes<br>transversaux</a>
+        <ul class="dropdown-menu">
+          <li><a href="axe1.html">Axe 1 Lien avec la société</a></li>
+          <li><a href="axe2.html">Axe 2 Parole, texte et connaissance</a></li>
+          <li><a href="axe3.html">Axe 3 Impact environnemental</a></li>
+        </ul>
+      </li>
+
+      <li><a href="appels-projets.html">Appels à projets</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+    <div class="content-inner">
+      <h1>Axe transversal B. Expression orale, écriture et connaissances</h1>
+
+      <div class="wp-leaders">
+        <div class="wp-leader">
+          <span class="wp-leader-avatar"><img src="assets/d-BG.jpg" alt="Bruno Guillaume"></span>
+          <div class="wp-leader-info">
+            <p class="wp-leader-name">Bruno Guillaume</p>
+            <p class="wp-leader-role">CR, Inria</p>
+            <p class="wp-leader-lab">Inria université de Lorraine</p>
+          </div>
+        </div>
+		<div class="wp-leader">
+          <span class="wp-leader-avatar"><img src="assets/d-RS.jpg" alt="Romain Sérizel"></span>
+          <div class="wp-leader-info">
+            <p class="wp-leader-name">Romain Sérizel</p>
+            <p class="wp-leader-role">Maître de conférences</p>
+            <p class="wp-leader-lab">Loria</p>
+          </div>
+        </div>
+        
+      </div>
+
+      <p>Le projet s'appuie sur le traitement automatique du langage (TAL) et l'IA, sans en faire pour autant un
+        workpackage à part entière. L'objectif de cet axe transversal est d'assurer la cohérence d'ensemble sur cette
+        thématique. Les responsables de l'axe sont eux-mêmes impliqués sur ce sujet. D'une part, ils travailleront au
+        Loria et à l'IECL à l'intégration des enjeux des sciences humaines dans le développement de leurs recherches,
+        et d'autre part, ils veilleront à une bonne couverture thématique lors des échanges avec les différents
+        sujets au sein du projet INSIGHT.</p>
+
+      <p>S'agissant de la transversalité entre modalités, l'objectif est d'exploiter les synergies entre les
+        différentes formes d'information (parole, texte et connaissances). La prise en compte conjointe de ces
+        modalités permettra de développer des modèles plus robustes et plus polyvalents. Par exemple, l'analyse
+        croisée des données textuelles et orales pourrait améliorer la reconnaissance contextuelle et la
+        compréhension des conversations. Cette approche facilitera également le développement de représentations des
+        connaissances plus riches et mieux connectées, en intégrant des informations issues de sources et de formats
+        différents.</p>
+
+      <p>Concernant la dimension transversale de chaque modalité (ou combinaison de modalités) avec les sciences
+        humaines, l'accent est mis sur l'enrichissement des technologies du TAL par des perspectives humanistes.
+        Cela suppose de prendre en compte les contextes linguistiques, culturels et historiques dans le développement
+        des outils de traitement de la parole et du texte. Les chercheurs travailleront en étroite collaboration avec
+        les spécialistes des sciences humaines pour traiter les questions éthiques et réduire les biais dans les
+        technologies langagières. Ils analyseront par exemple des corpus textuels variés afin de mettre au jour des
+        régularités cachées et d'améliorer la compréhension narrative des systèmes d'IA. Par ailleurs, les systèmes
+        de reconnaissance vocale seront adaptés pour mieux gérer la diversité linguistique, et les représentations
+        des connaissances seront alignées sur les processus cognitifs humains.</p>
+    </div>
+  </main>
+
+  <div class="hero-cta">
+    <p>Une question ? Une idée ?</p>
+    <a href="contact.html">Contactez-nous →</a>
+  </div>
+
+  <footer>
+    <span class="footer-logo"><img src="assets/footer-logo.png" alt="Insight"></span>
+
+    <div class="partner partner-unys">
+	 <a href="https://www.unys-sciences.fr/" target="_blank"
+        rel="noopener noreferrer">
+      <img src="assets/unys-logo.png" alt="UNYS — Recherche et compétences pour la société">
+	 </a>
+    </div>
+	
+    <div class="partner partner-iel">
+      <a href="https://www.info.gouv.fr/grand-dossier/france-2030" target="_blank"
+        rel="noopener noreferrer">
+        <img src="assets/france2030-insight-logo_.png" alt="Initiative d’Excellence Lorraine — France 2030 — INSIGHT">
+      </a>
+    </div>
+
+
+    <nav class="footer-links" aria-label="Liens de pied de page">
+      <a href="plan-du-site.html">Plan du site</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="accessibilite.html">Accessibilité</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight — Journée d’étude : Les corpus et données des LSHS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --coral: #ea4560;
+      --coral-dark: #d63852;
+      --ink: #150a10;
+      --ink-2: #1c0f16;
+      --cream: #ffffff;
+      --nav-h: 64px;
+      --band-h: 190px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: auto;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--ink);
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ---------- Header band ---------- */
+    header.band {
+      background: var(--coral);
+      padding: 24px 48px;
+      flex: none;
+    }
+
+    .logo img {
+      display: block;
+      height: 80px;
+      width: auto;
+    }
+
+    /* ---------- Nav ---------- */
+    nav.mainnav {
+      background: var(--ink);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      flex: none;
+    }
+
+    .navlist {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 12px 48px;
+      gap: 90px;
+    }
+
+    .navlist a {
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: #f4f2f3;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .navlist a::after {
+      display: none;
+    }
+
+    .navlist a:hover {
+      color: var(--coral);
+    }
+
+    .navlist>li>a.is-active {
+      color: var(--coral);
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      list-style: none;
+      padding: 10px 0;
+      min-width: 220px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      display: none;
+      z-index: 1000;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 8px 16px;
+      color: #f4f2f3;
+      font-size: 13.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: rgba(234, 69, 96, 0.15);
+      color: var(--coral);
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* ---------- Sub-page content ---------- */
+    main.content {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: visible;
+      padding: 72px 48px 96px;
+      background: #0b0a14 url('assets/hero-bg.png') center center / cover no-repeat;
+    }
+
+    main.content::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom, rgba(11, 10, 20, 0.28) 0%, rgba(21, 10, 16, 0.72) 78%, var(--ink) 100%);
+    }
+
+    .content-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 100%;
+      border-left: 3px solid var(--coral);
+      padding-left: 28px;
+    }
+
+    .content h1 {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 600;
+      font-size: 38px;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .event-date {
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      color: rgba(244, 242, 243, 0.88);
+      margin-bottom: 6px;
+    }
+
+    .event-location {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--coral);
+      margin-bottom: 28px;
+    }
+
+    .section-subtitle {
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      margin-top: 36px;
+      margin-bottom: 16px;
+    }
+
+    .presentation-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(244, 242, 243, 0.78);
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .program-kicker {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-top: 40px;
+      margin-bottom: 36px;
+    }
+
+    .slot {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 6px 28px;
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .slot:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .slot-time {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--coral);
+      letter-spacing: 0.01em;
+      padding-top: 4px;
+    }
+
+    .slot h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 14px;
+    }
+
+    .slot-break {
+      align-items: center;
+    }
+
+    .slot-break h2 {
+      margin-bottom: 0;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(244, 242, 243, 0.55);
+    }
+
+    .speakers {
+      list-style: none;
+    }
+
+    .speakers li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 10px;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: rgba(244, 242, 243, 0.78);
+    }
+
+    .speakers li:last-child {
+      margin-bottom: 0;
+    }
+
+    .speakers li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .talk-speaker {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.45;
+    }
+
+    .talk-speaker span {
+      display: inline;
+      font-weight: 500;
+      color: rgba(244, 242, 243, 0.52);
+    }
+
+    .talk-title {
+      font-size: 15.5px;
+      font-style: italic;
+      color: rgba(244, 242, 243, 0.92);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .abstract {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: rgba(244, 242, 243, 0.68);
+    }
+
+    .abstract+.abstract {
+      margin-top: 12px;
+    }
+
+    .organizers-note {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(244, 242, 243, 0.65);
+    }
+
+    /* ---------- Contact CTA ---------- */
+    .hero-cta {
+      position: static;
+      padding: 0 48px 44px;
+      text-align: right;
+    }
+
+    .hero-cta p {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 14px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--coral);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14.5px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(234, 69, 96, 0.35);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .hero-cta a:hover {
+      background: var(--coral-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--ink);
+      padding: 25px 48px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 70px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      flex: none;
+    }
+
+    .footer-logo img {
+      display: block;
+      height: 40px;
+      width: auto;
+    }
+
+    .partner img {
+      display: block;
+      height: 45px;
+      width: auto;
+    }
+
+    .partner-iel img {
+      height: 60px;
+    }
+
+
+    .footer-links {
+      margin-left: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .footer-links a {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--coral);
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      header.band {
+        padding: 18px 24px;
+      }
+
+      .logo img {
+        height: 32px;
+      }
+
+      .navlist {
+        padding: 10px 24px;
+        gap: 16px 24px;
+      }
+
+      footer {
+        padding: 14px 24px;
+      }
+
+      .footer-links {
+        margin-left: 0;
+      }
+
+      .hero-cta {
+        padding: 0 24px 24px;
+      }
+
+      main.content {
+        padding: 48px 24px 72px;
+      }
+
+      .content h1 {
+        font-size: 30px;
+      }
+
+      .slot {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .navlist {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      main.content {
+        padding: 48px 24px 72px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="band">
+    <span class="logo"><a href="index.html"><img src="assets/header-logo.png" alt="Insight"></a></span>
+  </header>
+
+  <nav class="mainnav">
+    <ul class="navlist">
+      <li><a href="presentation.html">Présentation<br>du programme</a></li>
+
+      <li><a href="projets-finances.html" class="">Projets<br>financés</a></li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle is-active">Actualité</a>
+        <ul class="dropdown-menu">
+          <li><a href="journee-kickoff.html">Journée kick off</a></li>
+          <li><a href="journees-etude.html" class="is-active">Journées d’étude</a></li>
+        </ul>
+      </li>
+
+      <li><a href="osc.html">Les instances</a></li>
+
+      <!-- Élément 4 : Work Packages -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Work Packages</a>
+        <ul class="dropdown-menu">
+          <li><a href="wp1.html">WP1 Données numériques </a></li>
+          <li><a href="wp2.html">WP2 Impact sur les sciences humaines et acculturation à l'IA</a></li>
+          <li><a href="wp3.html">WP3 Éthique, déontologie, responsabilité, transformation</a></li>
+          <li><a href="wp4.html">WP4 IA et NLP face aux spécificités des données SHS </a></li>
+        </ul>
+      </li>
+
+      <!-- Élément 5 : Axes transversaux -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Axes<br>transversaux</a>
+        <ul class="dropdown-menu">
+          <li><a href="axe1.html">Axe 1 Lien avec la société</a></li>
+          <li><a href="axe2.html">Axe 2 Parole, texte et connaissance</a></li>
+          <li><a href="axe3.html">Axe 3 Impact environnemental</a></li>
+        </ul>
+      </li>
+
+      <li><a href="appels-projets.html">Appels à projets</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+    <div class="content-inner">
+      <h1><span style="font-size: 32px; font-weight: 500; color: rgba(244,242,243,0.85);">Journée d'étude </h1>
+      <h1>Les corpus et données des LSHS<br><span
+          style="font-size: 24px; font-weight: 500; color: rgba(244,242,243,0.85);">Créateurs de défis pour la recherche
+          en informatique</span></h1>
+      <p class="event-date"><time datetime="2026-10-09">Vendredi 9 octobre 2026</time></p>
+      <p class="event-location">Salle des thèses, bâtiment Rabelais, île du Saulcy, Metz</p>
+
+      <h2 class="section-subtitle">Présentation</h2>
+      <p class="presentation-text">Cette journée d’étude propose un espace de dialogue autour des usages et des enjeux
+        de l’automatisation du traitement des corpus en lettres, sciences humaines et sociales (ex : extraction
+        d’information, fouille de textes, reconnaissance d’entités nommées, structuration de corpus, visualisation ou
+        encore analyse statistique, etc.). Elle accorde une place particulière aux recherches doctorales en cours, mais
+        s’adresse à l’ensemble des chercheurs et chercheuses, en informatique comme en LSHS et aux professionnels des
+        données (ingénieurs, documentalistes, archivistes, etc.) intéressés par ces questions.</p>
+      <p class="presentation-text">L’objectif de la journée est double. D’une part, offrir un espace d’échange où les
+        doctorantes et doctorants en LSHS pourront présenter leurs corpus, leurs besoins, leurs expérimentations et les
+        obstacles rencontrés dans l’usage d’outils computationnels. D’autre part, permettre aux chercheurs et
+        chercheuses en TAL et en informatique d’identifier, à partir de ces cas concrets, de nouveaux terrains
+        d’expérimentation, des problématiques scientifiques stimulantes et des opportunités de collaboration
+        interdisciplinaire. En mettant au centre les corpus eux-mêmes, dans leur matérialité, leur historicité et leur
+        complexité, cette journée entend montrer que les données des LSHS ne constituent pas seulement des objets
+        d’application pour l’informatique, mais qu’elles sont aussi productrices de questions théoriques et techniques
+        susceptibles de stimuler la recherche en informatique.</p>
+
+      <p class="program-kicker">Programme de la journée</p>
+
+      <article class="slot">
+        <div class="slot-time">9h00 – 9h15</div>
+        <div class="slot-body">
+          <h2>Bienvenue</h2>
+          <ul class="speakers">
+            <li>Présentation d’Insight par Maxime Amblard</li>
+            <li>Introduction à la journée par Claire Placial et Pierre Willaime</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">9h15 – 9h45</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Gaël Lejeune <span>Sorbonne Université</span></p>
+          <p class="talk-title">OCR, bruitage, hétérogénéité : exploiter des données textuelles hors « conditions de
+            laboratoire ».</p>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">9h45 – 10h15</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Eva Morant <span>Doctorante, Université de Lorraine</span></p>
+          <p class="talk-title">L’utilisation d’outils numériques pour la recherche en littérature : une aventure
+            surréaliste ?</p>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">10h15 – 10h45</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Pascal Macquet <span>Doctorant, Université de Lorraine</span></p>
+          <p class="talk-title">Les doctorants comptent ils les moutons électriques ? – la pastorale dramatique
+            humaniste (1547-1601) au prisme du numérique.</p>
+        </div>
+      </article>
+
+      <article class="slot slot-break">
+        <div class="slot-time">10h45 – 11h15</div>
+        <div class="slot-body">
+          <h2>Pause</h2>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">11h15 – 11h45</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Mathieu d’Aquin <span>Université de Lorraine</span></p>
+          <p class="talk-title">Structurer les données par la connaissance.</p>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">11h45 – 12h00</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Isabelle Pignone &amp; Pierre Willaime <span>MSH Lorraine · Archives Henri
+              Poincaré</span></p>
+          <p class="talk-title">Présentation des plateformes de la MSH Lorraine CENHTOR et TACTEO.</p>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">12h00 – 12h15</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Vincent Ventresque <span>Université Jean Monnet – Saint-Étienne</span></p>
+          <p class="talk-title">Explorer et annoter des corpus avec des modèles légers.</p>
+        </div>
+      </article>
+
+      <article class="slot slot-break">
+        <div class="slot-time">12h15 – 14h00</div>
+        <div class="slot-body">
+          <h2>Déjeuner</h2>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">14h00 – 14h30</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Sam Couqueberg <span>Doctorant, Université de Lorraine</span></p>
+          <p class="talk-title">Entre lecture serrée et lecture distante : annotation par modèle de langage d’un corpus
+            d’inspections administratives (1820-1939).</p>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">14h30 – 15h00</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Marianne Reboul <span>IHRIM</span></p>
+          <p class="talk-title">Comparer les traductions par alignement automatique (multilingue) : un cas d’étude sur
+            un corpus de grec ancien et de français.</p>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">15h00 – 15h30</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Matthias Benabdellah <span>Doctorant, Université de Lorraine</span></p>
+          <p class="talk-title">Reconnaissance automatique de l’écriture syriaque : une évaluation critique des outils
+            HTR et de leurs limites.</p>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">15h30 – 16h00</div>
+        <div class="slot-body">
+          <h2>Présentation</h2>
+          <p class="talk-speaker">Valentina Fedchenko <span>Inalco</span></p>
+          <p class="talk-title">Du moteur de recherche au partenaire de recherche : deux visions de la construction et
+            de l’exploitation des ressources textuelles.</p>
+        </div>
+      </article>
+
+      <article class="slot">
+        <div class="slot-time">16h00 – 16h30</div>
+        <div class="slot-body">
+          <h2>Discussion générale et clôture</h2>
+          <p class="abstract">Discussion générale et clôture de la journée.</p>
+        </div>
+      </article>
+
+      <div class="organizers-note">
+        Journée organisée par le projet INSIGHT avec le soutien de l’École Doctorale Humanités Nouvelles – Fernand
+        Braudel.
+      </div>
+
+    </div>
+  </main>
+
+  <div class="hero-cta">
+    <p>Une question ? Une idée ?</p>
+    <a href="contact.html">Contactez-nous →</a>
+  </div>
+
+  <footer>
+    <span class="footer-logo"><img src="assets/footer-logo.png" alt="Insight"></span>
+
+    <div class="partner partner-unys">
+	 <a href="https://www.unys-sciences.fr/" target="_blank"
+        rel="noopener noreferrer">
+      <img src="assets/unys-logo.png" alt="UNYS — Recherche et compétences pour la société">
+	 </a>
+    </div>
+	
+    <div class="partner partner-iel">
+      <a href="https://www.info.gouv.fr/grand-dossier/france-2030" target="_blank"
+        rel="noopener noreferrer">
+        <img src="assets/france2030-insight-logo_.png" alt="Initiative d’Excellence Lorraine — France 2030 — INSIGHT">
+      </a>
+    </div>
+
+
+    <nav class="footer-links" aria-label="Liens de pied de page">
+      <a href="plan-du-site.html">Plan du site</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="accessibilite.html">Accessibilité</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+
+</html>
