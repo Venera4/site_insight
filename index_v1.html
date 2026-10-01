@@ -54,60 +54,12 @@
       background: var(--coral);
       padding: 24px 48px;
       flex: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
     }
 
     .logo img {
       display: block;
       height: 80px;
       width: auto;
-    }
-
-    /* Partner logos, upper right corner */
-    .header-partners {
-      display: flex;
-      align-items: center;
-      gap: 45px;
-    }
-
-    /* thin divider between the two logos 
-    .header-partners .partner + .partner {
-      padding-left: 28px;
-      border-left: 1px solid rgba(255, 255, 255, 0.45);
-    }
-	*/
-
-    /* Turn the logos pure white (like the Insight logo) */
-    .partner img {
-      filter: brightness(0) invert(1);
-    }
-
-    .partner a {
-      display: block;
-      transition: opacity 0.15s ease;
-    }
-
-    .partner a:hover {
-      opacity: 0.8;
-    }
-
-    .partner-unys img {
-      display: block;
-      height: 46px;
-      width: auto;
-    }
-
-    /* The France 2030 PNG is a square with lots of empty margin:
-       crop it to the visible band so the logo isn't tiny */
-    .partner-iel img {
-      display: block;
-      width: 130px;
-      height: 58px;
-      object-fit: cover;
-      object-position: center;
     }
 
     /* ---------- Nav ---------- */
@@ -254,12 +206,26 @@
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       flex: none;
     }
+	
 
     .footer-logo img {
       display: block;
       height: 40px;
       width: auto;
     }
+
+    .partner img {
+      display: block;
+      height: 45px;
+      width: auto;
+    }
+
+    .partner-iel img {
+      height: 60px;
+    }
+
+	
+
 
     .footer-links {
       margin-left: auto;
@@ -289,23 +255,6 @@
         height: 32px;
       }
 
-      .partner-unys img {
-        height: 32px;
-      }
-
-      .partner-iel img {
-        width: 90px;
-        height: 40px;
-      }
-
-      .header-partners {
-        gap: 16px;
-      }
-
-      .header-partners .partner + .partner {
-        padding-left: 16px;
-      }
-
       .navlist {
         padding: 10px 24px;
         gap: 16px 24px;
@@ -328,10 +277,6 @@
         min-height: 100vh;
       }
 
-      header.band {
-        flex-wrap: wrap;
-      }
-
       .navlist {
         flex-direction: column;
         gap: 10px;
@@ -350,26 +295,13 @@
 
   <header class="band">
     <span class="logo"><a href="index.html"><img src="assets/header-logo.png" alt="Insight"></a></span>
-
-    <div class="header-partners">
-      <div class="partner partner-unys">
-        <a href="https://www.unys-sciences.fr/" target="_blank" rel="noopener noreferrer">
-          <img src="assets/unys-logo.png" alt="UNYS — Recherche et compétences pour la société">
-        </a>
-      </div>
-
-      <div class="partner partner-iel">
-        <a href="https://www.info.gouv.fr/grand-dossier/france-2030" target="_blank" rel="noopener noreferrer">
-          <img src="assets/france2030-insight-logo.png" alt="Initiative d’Excellence Lorraine — France 2030 — INSIGHT">
-        </a>
-      </div>
-    </div>
   </header>
 
   <nav class="mainnav">
     <ul class="navlist">
       <!-- Élément 1 : Présentation du programme -->
-      <li><a href="presentation.html">Présentation<br>du programme</a></li>
+	  <li><a href="presentation.html">Présentation<br>du programme</a></li>
+     
 
       <!-- Élément standard -->
       <li><a href="projets-finances.html">Projets<br>financés</a></li>
@@ -383,9 +315,9 @@
         </ul>
       </li>
 
-      <!-- Élément 3 : OSC : description et composition -->
       <li><a href="osc.html">Les instances</a></li>
-
+      <!--OSC : description et composition >
+ 
       <!-- Élément 4 : Work Packages -->
       <li class="dropdown">
         <a href="#" class="dropdown-toggle">Work Packages</a>
@@ -423,13 +355,34 @@
   <footer>
     <span class="footer-logo"><img src="assets/footer-logo.png" alt="Insight"></span>
 
+
+
+
+
+    <div class="partner partner-unys">
+	 <a href="https://www.unys-sciences.fr/" target="_blank"
+        rel="noopener noreferrer">
+      <img src="assets/unys-logo.png" alt="UNYS — Recherche et compétences pour la société">
+	 </a>
+    </div>
+	
+    <div class="partner partner-iel">
+      <a href="https://www.info.gouv.fr/grand-dossier/france-2030" target="_blank"
+        rel="noopener noreferrer">
+        <img src="assets/france2030-insight-logo_.png" alt="Initiative d’Excellence Lorraine — France 2030 — INSIGHT">
+      </a>
+    </div>
+
+
+
     <nav class="footer-links" aria-label="Liens de pied de page">
       <a href="plan-du-site.html">Plan du site</a>
       <a href="mentions-legales.html">Mentions légales</a>
-      <a href="accessibilite.html">Accessibilité</a>
+	  <a href="accessibilite.html">Accessibilité</a>
       <a href="contact.html">Contact</a>
     </nav>
   </footer>
+
 
 </body>
 
