@@ -1,0 +1,69 @@
+/* Accessibilite et mentions legales. */
+
+.content-inner {
+  max-width: 720px;
+}
+
+.content h1 {
+  font-size: 38px;
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.content h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 32px 0 12px;
+}
+
+.content p, .content li {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: rgba(244, 242, 243, 0.72);
+}
+
+.content p {
+  margin-bottom: 14px;
+}
+
+.content a {
+  color: var(--coral);
+  font-weight: 600;
+}
+
+.content a:hover {
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+
+      .navlist {
+        padding: 10px 24px;
+        gap: 16px 24px;
+      }
+
+      footer {
+        padding: 14px 24px;
+        gap: 24px;
+      }
+
+      .footer-links {
+        margin-left: 0;
+      }
+
+      main.content {
+        padding: 48px 24px 72px;
+      }
+
+      .content h1 {
+        font-size: 30px;
+      }
+    }
+
+@media (max-width: 560px) {
+      .navlist {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }

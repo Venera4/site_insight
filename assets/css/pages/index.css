@@ -1,0 +1,150 @@
+/* Particularites et adaptations mobiles : index.html. */
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* Language switcher shared by the French and English homepages. */
+.navlist {
+  gap: 20px clamp(20px, 4vw, 70px);
+}
+
+.lang-switch {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.lang-switch a {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.lang-switch a[aria-current="true"] {
+  color: var(--coral);
+  pointer-events: none;
+}
+
+.lang-switch .sep {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13.5px;
+}
+
+.lang-switch a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.dropdown:focus-within .dropdown-menu {
+  display: block;
+}
+
+.hero {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #0b0a14 url('../../hero-bg.png') center center / cover no-repeat;
+}
+
+.hero .vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(11, 10, 20, 0) 78%, var(--ink) 100%);
+}
+
+.hero-cta {
+  position: absolute;
+  right: 48px;
+  bottom: 44px;
+  z-index: 2;
+}
+
+.hero-cta p {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 14px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.hero-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--coral);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14.5px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(234, 69, 96, 0.35);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.hero-cta a:hover {
+  background: var(--coral-dark);
+  transform: translateY(-1px);
+}
+
+footer {
+  gap: 60px;
+}
+
+@media (max-width: 900px) {
+
+
+
+      .navlist {
+        padding: 10px 24px;
+        gap: 16px 24px;
+      }
+
+      footer {
+        padding: 14px 24px;
+        gap: 24px;
+      }
+
+      .footer-links {
+        margin-left: 0;
+      }
+    }
+
+@media (max-width: 560px) {
+      .lang-switch {
+        margin-left: 0;
+      }
+
+      body {
+        overflow: auto;
+        height: auto;
+        min-height: 100vh;
+      }
+
+.navlist {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hero {
+        flex: none;
+        height: 38vh;
+        min-height: 220px;
+      }
+    }

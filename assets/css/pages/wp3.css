@@ -1,0 +1,5 @@
+/* Recadrage du portrait d'Anna dans son avatar, sans modifier la photo source. */
+.wp-leader-avatar--anna img {
+  transform: scale(1.65);
+  transform-origin: 50% 35%;
+}

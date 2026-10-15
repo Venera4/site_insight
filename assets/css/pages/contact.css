@@ -1,0 +1,118 @@
+/* Particularites et adaptations mobiles : contact.html. */
+
+.navlist>li>a.is-active {
+  color: var(--coral);
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.content-inner {
+  max-width: 680px;
+}
+
+.content h1 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 38px;
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.content p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: rgba(244, 242, 243, 0.72);
+  margin-bottom: 18px;
+}
+
+.content p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-card {
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-card:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.contact-role {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(244, 242, 243, 0.55);
+  margin-bottom: 8px;
+}
+
+.contact-name {
+  font-size: 21px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.contact-affiliation {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(244, 242, 243, 0.65);
+  margin-bottom: 14px;
+  max-width: 520px;
+}
+
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--coral);
+}
+
+.contact-email:hover {
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+
+      .navlist {
+        padding: 10px 24px;
+        gap: 16px 24px;
+      }
+
+      footer {
+        padding: 14px 24px;
+      }
+
+      .footer-links {
+        margin-left: 0;
+      }
+
+      main.content {
+        padding: 48px 24px 72px;
+      }
+
+      .content h1 {
+        font-size: 30px;
+      }
+    }
+
+@media (max-width: 560px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .navlist {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      main.content {
+        padding: 48px 24px 72px;
+      }
+    }
